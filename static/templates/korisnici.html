@@ -1,0 +1,30 @@
+<table class="table table-hover">
+  <h2>Dozvole</h2>
+  <p>0 - za sve korisnike</p>
+  <p>1 - za neregistrovane korisnike</p>
+  <p>2 - za registrovane korisnike</p>
+  <p>3 - za administratore</p>
+  <thead>
+    <tr>
+      <td>R.br</td>
+      <td>Email</td>
+      <td>Adresa</td>
+      <td>Datum</td>
+      <td>Dozvola</td>
+      <td>Izmena</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="user in users">
+      <td>{{ $index + 1 }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.adresa }}</td>
+      <td>{{ user.datum | date:"dd.MM.y" }}</td>
+      <td><input class="form-control" type="text" ng-model="user.dozvola" value="{{ user.dozvola }}"></td>
+      <td>
+        <button class="btn btn-danger" ng-click="deleteUser(user.id_korisnik)">Obrisi</button>
+        <button class="btn btn-primary" ng-click="updateUser(user.id_korisnik)">Izmeni</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

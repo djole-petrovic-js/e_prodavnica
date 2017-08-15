@@ -1,0 +1,91 @@
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Obrisi link</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Da li ste sigurni da zelite da obrisete ovaj link...?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+        <button type="button" class="btn btn-primary" ng-click="deleteLink()" >Obrisi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Izmeni link</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>Naziv Linka</label>
+          <input class="form-control" type="text" ng-model="linkToModify.ime">
+        </div>
+        <div class="form-group">
+          <label>Putanja</label>
+          <input class="form-control" type="text" ng-model="linkToModify.link">
+        </div>
+        <div class="form-group">
+          <label>Dozvola</label>
+          <input class="form-control" type="text" ng-model="linkToModify.dozvola">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Odustani</button>
+        <button type="button" class="btn btn-primary" ng-click="modifyLink()">Izmeni</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>R.br</td>
+      <td>Naziv linka</td>
+      <td>Putanja</td>
+      <td>Dozvola</td>
+      <td>Izmena</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="link in links">
+      <td>{{ $index + 1 }}</td>
+      <td>{{ link.ime }}</td>
+      <td>{{ link.link }}</td>
+      <td>{{ link.dozvola }}</td>
+      <td>
+        <button class="btn btn-primary" ng-click="showModificationForm(link)">Izmeni</button>
+        <button class="btn btn-danger" ng-click="confirmDelete(link.id_linkovi)">Obrisi</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h1>Dodaj Link</h1>
+<div class="form-group">
+  <label>Naziv linka</label>
+  <input type="text" class="form-control" placeholder="Naziv linka..." ng-model="linkToAdd.ime">
+</div>
+<div class="form-group">
+  <label>Putanja</label>
+  <input type="text" class="form-control" placeholder="Putanja..." ng-model="linkToAdd.link">
+</div>
+<div class="form-group">
+  <label>Dozvola</label>
+  <input type="text" class="form-control" placeholder="Dozvola..." ng-model="linkToAdd.dozvola">
+</div>
+<div class="form-group">
+  <button class="btn btn-primary" ng-click="addLink()">Dodaj</button>
+</div>

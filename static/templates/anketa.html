@@ -1,0 +1,14 @@
+<p>Ime ankete : {{ pollName }}</p>
+<p>Ukupan broj glasova za anketu : {{ votesSum }}</p>
+<div class="form-group">
+  <input type="text" placeholder="Ime ankete..." class="form-control" ng-model="pollName">
+</div>
+<p class="well">Opcije</p>
+<div class="form-group" ng-repeat="option in poll">
+  <input type="text" ng-model="option.opcija" class="form-control">
+  <p>Broj Glasova : {{ option.broj_glasova }}</p>
+</div>
+<input type="checkbox" ng-checked="showPoll" ng-click="hideShowPoll()"><label>Vidljivost ankete</label>
+<br/>
+<button class="btn btn-primary" ng-click="resetVotes()">Resetujte anketu</button>
+<button class="btn btn-primary" ng-click="updatePoll()">Izmenite anketu</button>

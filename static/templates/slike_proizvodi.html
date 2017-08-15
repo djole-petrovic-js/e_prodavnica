@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-md-8">
+        <h2>Izaberite proizvod</h2>
+        <div class="form-group"> 
+            <select class="form-control" ng-model="productID">
+                <option ng-repeat="product in products" value="{{ product.id_proizvodi }}">
+                    {{ product.pNaziv }}
+                </option>
+            </select>
+            <button ng-if="productID" class="btn btn-primary" ng-click="getPhotos()">Prikazi fotografije</button>
+        </div>
+    </div>
+</div>
+<div class="row" ng-if="productID">
+    <div class="col-md-8">
+        <h2>Nova fotografija za izabrani proizvod</h2>
+        <form action="/utilities/add_photo.php" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="id" value="{{ productID }}">
+            <div class="form-group">
+                <input class="form-control" type="text" name="name" placeholder="Naziv slike">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="file" name="image">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Posalji</button>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row" ng-if="photos.length === 0">
+    <div class="col-md-8">
+        <h2>Trenutno nema fotografija za ovaj proizvod...</h2>
+    </div>
+</div>
+<div class="row" ng-if="photos.length > 0">
+    <div class="col-md-12">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <td>R.br</td>
+                    <td>Naziv</td>
+                    <td>Slika</td>
+                    <td>Proizvod</td>
+                    <td>Podesavanja</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="photo in photos">
+                    <td>{{ $index + 1 }}</td>
+                    <td><input type="text" class="form-control"
+                      value="{{ photo.naziv_slike }}"
+                      ng-model="photo.naziv_slike" 
+                    ></td>
+                    <td>
+                        <img class="admin-photos" ng-src="{{ photo.putanja }}">
+                    </td>
+                    <td>
+                        <select class="form-control" ng-model="photo.id_proizvodi">
+                            <option ng-repeat="p in products" value="{{ p.id_proizvodi }}">
+                                {{ p.pNaziv }}
+                            </option>
+                        </select>
+                    </td>
+                    <td>
+                        <button ng-click="modifyPhoto(photo)" class="btn btn-primary">Izmeni</button>
+                        <button ng-click="deletePhoto(photo.id_slike)" class="btn btn-danger">Obrisi</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,24 @@
+<h1>Kategorije</h1>
+<div class="form-group">
+  <input type="text" class="form-control" placeholder="Naziv..." ng-model="categorieName">
+  <button class="btn btn-primary" ng-click="addCategory()">Dodaj</button>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <td>R.br</td>
+      <td>Naziv</td>
+      <td>Izmena</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="categorie in categories">
+      <td>{{ $index + 1 }}</td>
+      <td><input class="form-control" type="text" value={{ categorie.naziv }} ng-model="categorie.naziv"></td>
+      <td>
+        <button class="btn btn-primary" ng-click="modifyCategorie(categorie)">Izmeni</button>
+        <button class="btn btn-danger" ng-click="deleteCategorie(categorie.id_kategorije)">Obrisi</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

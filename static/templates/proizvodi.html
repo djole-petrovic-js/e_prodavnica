@@ -1,0 +1,61 @@
+<button class="btn btn-primary" ng-click="showHideProductForm()">Dodaj Proizvod</button>
+<form action="/utilities/add_product.php" method="POST" enctype="multipart/form-data" ng-show="showProductForm">
+  <h2>Proizvod</h2>
+  <div class="form-group">
+    <input type="text" placeholder="Naziv..." class="form-control" name="naziv">
+  </div>
+  <div class="form-group">
+    <select name="kategorija" ng-bind-html="options" class="form-control">
+      {{ options }}
+    </select>
+  </div>
+  <div class="form-group">
+    <input type="text" placeholder="Cena..." class="form-control" name="cena">
+  </div>
+  <div class="form-group">
+    <input type="text" placeholder="Kolicina..." class="form-control" name="kolicina">
+  </div>
+  <div class="form-group">
+    <textarea name="opis" class="form-control" placeholder="Opis...">
+      
+    </textarea>
+  </div>
+  <div class="form-group">
+    <input type="file" class="form-control" name="slika">
+  </div>
+  <input class="btn btn-primary" type="submit" name="submit" value="Dodaj">
+</form>
+<div class="alert alert-warning" ng-show="products.length === 0">
+  Trenutno ne postoji ni jedan proizvod...
+</div>
+<table class="table table-hover" ng-show="products.length > 0">
+  <thead>
+    <tr>
+      <td>R.br</td>
+      <td>Naziv</td>
+      <td>Kategorija</td>
+      <td>Cena</td>
+      <td>Kolicina</td>
+      <td>Izmena</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="product in products">
+      <td>{{ $index + 1 }}</td>
+      <td><input ng-model="product.pNaziv" class="form-control" type="text" value="{{ product.pNaziv }}"></td>
+      <td>
+        <select class="form-control" ng-model="product.id_kategorije">
+          <option ng-repeat="c in categories" value="{{ c.id_kategorije }}">
+            {{ c.naziv }}
+          </option>
+        </select>
+      </td>
+      <td><input ng-model="product.cena" class="form-control" type="text" value="{{ product.cena }}"></td>
+      <td><input ng-model="product.kolicina" class="form-control" type="text" value="{{ product.kolicina }}"></td>
+      <td>
+        <button class="btn btn-primary" ng-click="modifyProduct(product)">Izmeni</button>
+        <button class="btn btn-danger" ng-click="deleteProduct(product.id_proizvodi)">Obrisi</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
